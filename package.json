@@ -1,0 +1,45 @@
+{
+  "name": "itms_backend",
+  "version": "1.0.0",
+  "description": "Intelligence Telemary Management System",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:api": "nodemon server.js",
+    "start:socket": "nodemon socket.js",
+    "dev": "concurrently \"npm run start:api\" \"npm run start:socket\""
+  },
+  "keywords": [],
+  "author": "Jainish Rahukaal",
+  "license": "ISC",
+  "dependencies": {
+    "@rodrigogs/mysql-events": "^0.6.0",
+    "async": "^3.2.4",
+    "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
+    "bluebird": "^3.7.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "exceljs": "^4.4.0",
+    "express": "^4.19.2",
+    "http-status": "^1.6.2",
+    "joi": "^17.9.1",
+    "jsonwebtoken": "^9.0.0",
+    "kalmanjs": "^1.1.0",
+    "moment-timezone": "^0.5.45",
+    "mssql": "^9.3.2",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.10.3",
+    "node-cron": "^3.0.3",
+    "nodemon": "^2.0.22",
+    "pdf-lib": "^1.17.1",
+    "pdfkit": "^0.15.0",
+    "redis": "^4.6.15",
+    "sequelize": "^6.37.3",
+    "socket.io": "^4.7.5",
+    "tedious": "^15.1.2"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

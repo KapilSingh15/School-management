@@ -1,1 +1,1 @@
-# School-management
+# fastrackerz-backend
