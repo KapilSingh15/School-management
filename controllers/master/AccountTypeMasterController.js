@@ -3,7 +3,7 @@ const accountTypeMasterService = new AccountTypeMasterService();
 const httpStatus = require("http-status");
 const Response = require("../../response/index");
 
-// Add a new account type
+// Add a new account types
 const ADD_ACCOUNT_TYPE = async (req, res) => {
     try {
         await accountTypeMasterService.createAccountType(req.body);
