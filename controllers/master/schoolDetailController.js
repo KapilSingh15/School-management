@@ -6,7 +6,7 @@ const Response = require("../../response/index");
 // Add a new school
 const ADD_SCHOOL = async (req, res) => {
     try {
-        await schoolDetailService.createScool(req.body);
+        await schoolDetailService.createSchool(req.body);
         return Response.success(
             req,
             res,

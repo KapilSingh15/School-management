@@ -9,9 +9,25 @@ class FeeReceiptMasterService {
         try {
             const receipt = await db.FeeReceiptMaster.create({
                 StudentID: data.StudentID,
-                ReceiptDate: data.ReceiptDate,
-                TotalAmount: data.TotalAmount,
-                StatusID: data.StatusID
+                ClassID: data.ClassID,
+                SectionID: data.SectionID,
+                FinancialYearID: data.FinancialYearID,
+                FeeDate: data.FeeDate,
+                PaymentMode: data.PaymentMode,
+                TotalFee: data.TotalFee,
+                LateFee: data.LateFee,
+                ConcessionPercentage: data.ConcessionPercentage,
+                ConcessionAmount: data.ConcessionAmount,
+                NetFee: data.NetFee,
+                ReceiptAmount: data.ReceiptAmount,
+                Balance: data.Balance,
+                BankName: data.BankName,
+                ChequeNo: data.ChequeNo,
+                ChequeDate: data.ChequeDate,
+                Remarks: data.Remarks,
+                ReceiptDetails: data.ReceiptDetails,
+                CreatedOn: data.CreatedOn,
+                CreatedBy: data.CreatedBy
             });
             return receipt;
         } catch (error) {
@@ -25,9 +41,25 @@ class FeeReceiptMasterService {
         try {
             const updatedReceipt = await db.FeeReceiptMaster.update({
                 StudentID: data.StudentID,
-                ReceiptDate: data.ReceiptDate,
-                TotalAmount: data.TotalAmount,
-                StatusID: data.StatusID
+                ClassID: data.ClassID,
+                SectionID: data.SectionID,
+                FinancialYearID: data.FinancialYearID,
+                FeeDate: data.FeeDate,
+                PaymentMode: data.PaymentMode,
+                TotalFee: data.TotalFee,
+                LateFee: data.LateFee,
+                ConcessionPercentage: data.ConcessionPercentage,
+                ConcessionAmount: data.ConcessionAmount,
+                NetFee: data.NetFee,
+                ReceiptAmount: data.ReceiptAmount,
+                Balance: data.Balance,
+                BankName: data.BankName,
+                ChequeNo: data.ChequeNo,
+                ChequeDate: data.ChequeDate,
+                Remarks: data.Remarks,
+                ReceiptDetails: data.ReceiptDetails,
+                ModifiedOn: data.ModifiedOn,
+                ModifiedBy: data.ModifiedBy
             }, {
                 where: { FeeReceiptID: feeReceiptId }
             });

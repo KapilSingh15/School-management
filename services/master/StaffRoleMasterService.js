@@ -3,14 +3,16 @@ const { Op } = require("sequelize");
 const Helper = require("../../config/helper");
 
 class StaffRoleMasterService {
-    
+
     // Create a new staff role record
     async createRole(data) {
         try {
             const role = await db.StaffRoleMaster.create({
                 RoleName: data.RoleName,
-                Description: data.Description,
-                StatusID: data.StatusID
+                TypeID: data.TypeID,
+                BranchID: data.BranchID,
+                CreatedBy: data.CreatedBy,
+                CreatedOn: new Date(),
             });
             return role;
         } catch (error) {
@@ -24,8 +26,10 @@ class StaffRoleMasterService {
         try {
             const updatedRole = await db.StaffRoleMaster.update({
                 RoleName: data.RoleName,
-                Description: data.Description,
-                StatusID: data.StatusID
+                TypeID: data.TypeID,
+                BranchID: data.BranchID,
+                ModifiedBy: data.ModifiedBy,
+                ModifiedOn: new Date(),
             }, {
                 where: { RoleID: roleId }
             });

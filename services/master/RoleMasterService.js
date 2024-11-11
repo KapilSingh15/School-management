@@ -8,9 +8,7 @@ class RoleMasterService {
     async createRole(data) {
         try {
             const role = await db.RoleMaster.create({
-                RoleName: data.RoleName,
-                Description: data.Description,
-                StatusID: data.StatusID
+                RoleName: data.RoleName, // Only RoleName is required
             });
             return role;
         } catch (error) {
@@ -23,9 +21,7 @@ class RoleMasterService {
     async updateRole(roleId, data) {
         try {
             const updatedRole = await db.RoleMaster.update({
-                RoleName: data.RoleName,
-                Description: data.Description,
-                StatusID: data.StatusID
+                RoleName: data.RoleName, // Only RoleName is updated
             }, {
                 where: { RoleID: roleId }
             });

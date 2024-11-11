@@ -25,6 +25,6 @@ sequelize.authenticate().then(() => {
   console.error('Unable to connect to the database:', error);
 });
 
-db.schoolDetail = require("./master/schooldetail")(sequelize, Sequelize);
+db.schoolDetails = require("./master/schooldetail")(sequelize, Sequelize);
 db.AccountTypeMaster = require("./master/AccountTypeMaster")(sequelize, Sequelize);
 module.exports = db;

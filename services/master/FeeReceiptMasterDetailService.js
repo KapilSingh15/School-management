@@ -7,11 +7,9 @@ class FeeReceiptMasterDetailService {
     // Create a new fee receipt master detail record
     async createReceiptMasterDetail(data) {
         try {
-            const receiptDetail = await db.FeeReceiptMasterDetail.create({
+            const receiptDetail = await db.FeeReceiptMasterDetails.create({
                 FeeReceiptID: data.FeeReceiptID,
-                Amount: data.Amount,
-                Description: data.Description,
-                StatusID: data.StatusID
+                MonthID: data.MonthID
             });
             return receiptDetail;
         } catch (error) {
@@ -20,16 +18,14 @@ class FeeReceiptMasterDetailService {
         }
     }
 
-    // Update an existing fee receipt master detail record by DetailID
-    async updateReceiptMasterDetail(detailId, data) {
+    // Update an existing fee receipt master detail record by FeeReceiptDetailID
+    async updateReceiptMasterDetail(feeReceiptDetailId, data) {
         try {
-            const updatedReceiptDetail = await db.FeeReceiptMasterDetail.update({
+            const updatedReceiptDetail = await db.FeeReceiptMasterDetails.update({
                 FeeReceiptID: data.FeeReceiptID,
-                Amount: data.Amount,
-                Description: data.Description,
-                StatusID: data.StatusID
+                MonthID: data.MonthID
             }, {
-                where: { DetailID: detailId }
+                where: { FeeReceiptDetailID: feeReceiptDetailId }
             });
 
             if (updatedReceiptDetail[0] === 0) {
@@ -43,11 +39,11 @@ class FeeReceiptMasterDetailService {
         }
     }
 
-    // Delete a fee receipt master detail record by DetailID
-    async deleteReceiptMasterDetail(detailId) {
+    // Delete a fee receipt master detail record by FeeReceiptDetailID
+    async deleteReceiptMasterDetail(feeReceiptDetailId) {
         try {
-            const deleted = await db.FeeReceiptMasterDetail.destroy({
-                where: { DetailID: detailId }
+            const deleted = await db.FeeReceiptMasterDetails.destroy({
+                where: { FeeReceiptDetailID: feeReceiptDetailId }
             });
 
             if (deleted === 0) {
@@ -75,10 +71,10 @@ class FeeReceiptMasterDetailService {
             }
 
             // Sorting settings
-            const order = sortby && sortCode ? [[sortby, sortCode]] : [["DetailID", "ASC"]];
+            const order = sortby && sortCode ? [[sortby, sortCode]] : [["FeeReceiptDetailID", "ASC"]];
 
             // Fetch data with pagination, search, and sorting
-            const { count, rows } = await db.FeeReceiptMasterDetail.findAndCountAll({
+            const { count, rows } = await db.FeeReceiptMasterDetails.findAndCountAll({
                 where,
                 offset,
                 limit: parseInt(limit) || Helper.getPageNumber(1, limit), // Default limit if undefined

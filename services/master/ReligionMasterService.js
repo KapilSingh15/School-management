@@ -9,8 +9,6 @@ class ReligionMasterService {
         try {
             const religion = await db.ReligionMaster.create({
                 ReligionName: data.ReligionName,
-                Description: data.Description,
-                StatusID: data.StatusID
             });
             return religion;
         } catch (error) {
@@ -24,8 +22,6 @@ class ReligionMasterService {
         try {
             const updatedReligion = await db.ReligionMaster.update({
                 ReligionName: data.ReligionName,
-                Description: data.Description,
-                StatusID: data.StatusID
             }, {
                 where: { ReligionID: religionId }
             });

@@ -3,14 +3,14 @@ const { Op } = require("sequelize");
 const Helper = require("../../config/helper");
 
 class StopageMasterService {
-    
-    // Create a new stopage record
+
+    // Create a new Stopage record
     async createStopage(data) {
         try {
             const stopage = await db.StopageMaster.create({
-                StopageName: data.StopageName,
-                StopageLocation: data.StopageLocation,
-                StatusID: data.StatusID
+                RouteID: data.RouteID,  // Foreign key reference to Route
+                Stopage: data.Stopage,  // Name of the stopage
+                StatusID: data.StatusID,  // Status of the stopage
             });
             return stopage;
         } catch (error) {
@@ -19,13 +19,13 @@ class StopageMasterService {
         }
     }
 
-    // Update an existing stopage record by StopageID
+    // Update an existing Stopage record by StopageID
     async updateStopage(stopageId, data) {
         try {
             const updatedStopage = await db.StopageMaster.update({
-                StopageName: data.StopageName,
-                StopageLocation: data.StopageLocation,
-                StatusID: data.StatusID
+                RouteID: data.RouteID,  // Foreign key reference to Route
+                Stopage: data.Stopage,  // Name of the stopage
+                StatusID: data.StatusID,  // Status of the stopage
             }, {
                 where: { StopageID: stopageId }
             });
@@ -41,7 +41,7 @@ class StopageMasterService {
         }
     }
 
-    // Delete a stopage record by StopageID
+    // Delete a Stopage record by StopageID
     async deleteStopage(stopageId) {
         try {
             const deleted = await db.StopageMaster.destroy({
@@ -59,7 +59,7 @@ class StopageMasterService {
         }
     }
 
-    // Fetch stopage records with optional search, sorting, and pagination
+    // Fetch Stopage records with optional search, sorting, and pagination
     async fetchStopages(query) {
         const { searchBy, searchValue, sortby, sortCode, page, limit } = query;
 

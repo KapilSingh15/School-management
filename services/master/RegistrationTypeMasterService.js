@@ -8,9 +8,7 @@ class RegistrationTypeMasterService {
     async createRegistrationType(data) {
         try {
             const registrationType = await db.RegistrationTypeMaster.create({
-                TypeName: data.TypeName,
-                Description: data.Description,
-                StatusID: data.StatusID
+                RegistrationType: data.RegistrationType,
             });
             return registrationType;
         } catch (error) {
@@ -19,15 +17,13 @@ class RegistrationTypeMasterService {
         }
     }
 
-    // Update an existing registration type record by TypeID
-    async updateRegistrationType(typeId, data) {
+    // Update an existing registration type record by RegistrationTypeID
+    async updateRegistrationType(registrationTypeId, data) {
         try {
             const updatedRegistrationType = await db.RegistrationTypeMaster.update({
-                TypeName: data.TypeName,
-                Description: data.Description,
-                StatusID: data.StatusID
+                RegistrationType: data.RegistrationType,
             }, {
-                where: { TypeID: typeId }
+                where: { RegistrationTypeID: registrationTypeId }
             });
 
             if (updatedRegistrationType[0] === 0) {
@@ -41,11 +37,11 @@ class RegistrationTypeMasterService {
         }
     }
 
-    // Delete a registration type record by TypeID
-    async deleteRegistrationType(typeId) {
+    // Delete a registration type record by RegistrationTypeID
+    async deleteRegistrationType(registrationTypeId) {
         try {
             const deleted = await db.RegistrationTypeMaster.destroy({
-                where: { TypeID: typeId }
+                where: { RegistrationTypeID: registrationTypeId }
             });
 
             if (deleted === 0) {
@@ -73,7 +69,7 @@ class RegistrationTypeMasterService {
             }
 
             // Sorting settings
-            const order = sortby && sortCode ? [[sortby, sortCode]] : [["TypeID", "ASC"]];
+            const order = sortby && sortCode ? [[sortby, sortCode]] : [["RegistrationTypeID", "ASC"]];
 
             // Fetch data with pagination, search, and sorting
             const { count, rows } = await db.RegistrationTypeMaster.findAndCountAll({

@@ -9,8 +9,10 @@ class ModuleMasterService {
         try {
             const module = await db.ModuleMaster.create({
                 ModuleName: data.ModuleName,
-                Description: data.Description,
-                StatusID: data.StatusID
+                Sort: data.Sort, // Updated field based on schema
+                Status: data.Status, // Updated field based on schema
+                CreatedOn: data.CreatedOn,
+                CreatedBy: data.CreatedBy
             });
             return module;
         } catch (error) {
@@ -24,8 +26,10 @@ class ModuleMasterService {
         try {
             const updatedModule = await db.ModuleMaster.update({
                 ModuleName: data.ModuleName,
-                Description: data.Description,
-                StatusID: data.StatusID
+                Sort: data.Sort, // Updated field based on schema
+                Status: data.Status, // Updated field based on schema
+                ModifiedOn: data.ModifiedOn,
+                ModifiedBy: data.ModifiedBy
             }, {
                 where: { ModuleID: moduleId }
             });

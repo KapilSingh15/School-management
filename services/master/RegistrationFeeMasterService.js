@@ -8,9 +8,12 @@ class RegistrationFeeMasterService {
     async createRegistrationFee(data) {
         try {
             const registrationFee = await db.RegistrationFeeMaster.create({
-                FeeAmount: data.FeeAmount,
-                Description: data.Description,
-                StatusID: data.StatusID
+                RegistrationTypeID: data.RegistrationTypeID,
+                FinancialYearID: data.FinancialYearID,
+                BranchID: data.BranchID,
+                RegistrationFee: data.RegistrationFee,
+                CreatedOn: data.CreatedOn,
+                CreatedBy: data.CreatedBy
             });
             return registrationFee;
         } catch (error) {
@@ -19,15 +22,18 @@ class RegistrationFeeMasterService {
         }
     }
 
-    // Update an existing registration fee record by FeeID
+    // Update an existing registration fee record by RegistrationFeeID
     async updateRegistrationFee(feeId, data) {
         try {
             const updatedRegistrationFee = await db.RegistrationFeeMaster.update({
-                FeeAmount: data.FeeAmount,
-                Description: data.Description,
-                StatusID: data.StatusID
+                RegistrationTypeID: data.RegistrationTypeID,
+                FinancialYearID: data.FinancialYearID,
+                BranchID: data.BranchID,
+                RegistrationFee: data.RegistrationFee,
+                ModifiedOn: data.ModifiedOn,
+                ModifiedBy: data.ModifiedBy
             }, {
-                where: { FeeID: feeId }
+                where: { RegistrationFeeID: feeId }
             });
 
             if (updatedRegistrationFee[0] === 0) {
@@ -41,11 +47,11 @@ class RegistrationFeeMasterService {
         }
     }
 
-    // Delete a registration fee record by FeeID
+    // Delete a registration fee record by RegistrationFeeID
     async deleteRegistrationFee(feeId) {
         try {
             const deleted = await db.RegistrationFeeMaster.destroy({
-                where: { FeeID: feeId }
+                where: { RegistrationFeeID: feeId }
             });
 
             if (deleted === 0) {
@@ -73,7 +79,7 @@ class RegistrationFeeMasterService {
             }
 
             // Sorting settings
-            const order = sortby && sortCode ? [[sortby, sortCode]] : [["FeeID", "ASC"]];
+            const order = sortby && sortCode ? [[sortby, sortCode]] : [["RegistrationFeeID", "ASC"]];
 
             // Fetch data with pagination, search, and sorting
             const { count, rows } = await db.RegistrationFeeMaster.findAndCountAll({

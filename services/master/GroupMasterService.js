@@ -8,9 +8,7 @@ class GroupMasterService {
     async createGroup(data) {
         try {
             const group = await db.GroupMaster.create({
-                GroupName: data.GroupName,
-                Description: data.Description,
-                StatusID: data.StatusID
+                GroupName: data.GroupName, // GroupName from schema
             });
             return group;
         } catch (error) {
@@ -23,11 +21,9 @@ class GroupMasterService {
     async updateGroup(groupId, data) {
         try {
             const updatedGroup = await db.GroupMaster.update({
-                GroupName: data.GroupName,
-                Description: data.Description,
-                StatusID: data.StatusID
+                GroupName: data.GroupName, // GroupName from schema
             }, {
-                where: { GroupID: groupId }
+                where: { GroupID: groupId } // Matching the GroupID to identify the record
             });
 
             if (updatedGroup[0] === 0) {

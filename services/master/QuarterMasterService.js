@@ -7,10 +7,9 @@ class QuarterMasterService {
     // Create a new quarter record
     async createQuarter(data) {
         try {
-            const quarter = await db.QuarterMaster.create({
-                QuarterName: data.QuarterName,
-                Description: data.Description,
-                StatusID: data.StatusID
+            const quarter = await db.QuaterMaster.create({
+                Quater: data.Quater,
+                FinancialYearID: data.FinancialYearID
             });
             return quarter;
         } catch (error) {
@@ -19,15 +18,14 @@ class QuarterMasterService {
         }
     }
 
-    // Update an existing quarter record by QuarterID
-    async updateQuarter(quarterId, data) {
+    // Update an existing quarter record by QuaterID
+    async updateQuarter(quaterId, data) {
         try {
-            const updatedQuarter = await db.QuarterMaster.update({
-                QuarterName: data.QuarterName,
-                Description: data.Description,
-                StatusID: data.StatusID
+            const updatedQuarter = await db.QuaterMaster.update({
+                Quater: data.Quater,
+                FinancialYearID: data.FinancialYearID
             }, {
-                where: { QuarterID: quarterId }
+                where: { QuaterID: quaterId }
             });
 
             if (updatedQuarter[0] === 0) {
@@ -41,11 +39,11 @@ class QuarterMasterService {
         }
     }
 
-    // Delete a quarter record by QuarterID
-    async deleteQuarter(quarterId) {
+    // Delete a quarter record by QuaterID
+    async deleteQuarter(quaterId) {
         try {
-            const deleted = await db.QuarterMaster.destroy({
-                where: { QuarterID: quarterId }
+            const deleted = await db.QuaterMaster.destroy({
+                where: { QuaterID: quaterId }
             });
 
             if (deleted === 0) {
@@ -73,10 +71,10 @@ class QuarterMasterService {
             }
 
             // Sorting settings
-            const order = sortby && sortCode ? [[sortby, sortCode]] : [["QuarterID", "ASC"]];
+            const order = sortby && sortCode ? [[sortby, sortCode]] : [["QuaterID", "ASC"]];
 
             // Fetch data with pagination, search, and sorting
-            const { count, rows } = await db.QuarterMaster.findAndCountAll({
+            const { count, rows } = await db.QuaterMaster.findAndCountAll({
                 where,
                 offset,
                 limit: parseInt(limit) || Helper.getPageNumber(1, limit), // Default limit if undefined

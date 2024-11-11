@@ -8,9 +8,10 @@ class GradeMasterService {
     async createGrade(data) {
         try {
             const grade = await db.GradeMaster.create({
-                GradeName: data.GradeName,
-                Description: data.Description,
-                StatusID: data.StatusID
+                Grade: data.Grade,               // Grade field from the schema
+                RangeFrom: data.RangeFrom,       // RangeFrom field from the schema
+                RangeTo: data.RangeTo,           // RangeTo field from the schema
+                StatusID: data.StatusID          // StatusID from the schema
             });
             return grade;
         } catch (error) {
@@ -23,11 +24,12 @@ class GradeMasterService {
     async updateGrade(gradeId, data) {
         try {
             const updatedGrade = await db.GradeMaster.update({
-                GradeName: data.GradeName,
-                Description: data.Description,
-                StatusID: data.StatusID
+                Grade: data.Grade,               // Grade field from the schema
+                RangeFrom: data.RangeFrom,       // RangeFrom field from the schema
+                RangeTo: data.RangeTo,           // RangeTo field from the schema
+                StatusID: data.StatusID          // StatusID from the schema
             }, {
-                where: { GradeID: gradeId }
+                where: { GradeID: gradeId }      // Identifying the grade by GradeID
             });
 
             if (updatedGrade[0] === 0) {
@@ -45,7 +47,7 @@ class GradeMasterService {
     async deleteGrade(gradeId) {
         try {
             const deleted = await db.GradeMaster.destroy({
-                where: { GradeID: gradeId }
+                where: { GradeID: gradeId }     // Deleting the grade record by GradeID
             });
 
             if (deleted === 0) {
@@ -69,11 +71,11 @@ class GradeMasterService {
 
             // Search functionality
             if (searchBy && searchValue) {
-                where[searchBy] = { [Op.like]: `%${searchValue}%` };
+                where[searchBy] = { [Op.like]: `%${searchValue}%` };  // Search by column
             }
 
             // Sorting settings
-            const order = sortby && sortCode ? [[sortby, sortCode]] : [["GradeID", "ASC"]];
+            const order = sortby && sortCode ? [[sortby, sortCode]] : [["GradeID", "ASC"]]; // Sorting based on provided column
 
             // Fetch data with pagination, search, and sorting
             const { count, rows } = await db.GradeMaster.findAndCountAll({

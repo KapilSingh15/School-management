@@ -8,9 +8,7 @@ class ResultStatusService {
     async createResultStatus(data) {
         try {
             const resultStatus = await db.ResultStatus.create({
-                StatusName: data.StatusName,
-                Description: data.Description,
-                IsActive: data.IsActive
+                Result: data.Result, // Only 'Result' is needed
             });
             return resultStatus;
         } catch (error) {
@@ -19,15 +17,13 @@ class ResultStatusService {
         }
     }
 
-    // Update an existing result status record by StatusID
-    async updateResultStatus(statusId, data) {
+    // Update an existing result status record by ResultID
+    async updateResultStatus(resultId, data) {
         try {
             const updatedResultStatus = await db.ResultStatus.update({
-                StatusName: data.StatusName,
-                Description: data.Description,
-                IsActive: data.IsActive
+                Result: data.Result, // Only 'Result' is updated
             }, {
-                where: { StatusID: statusId }
+                where: { ResultID: resultId }
             });
 
             if (updatedResultStatus[0] === 0) {
@@ -41,11 +37,11 @@ class ResultStatusService {
         }
     }
 
-    // Delete a result status record by StatusID
-    async deleteResultStatus(statusId) {
+    // Delete a result status record by ResultID
+    async deleteResultStatus(resultId) {
         try {
             const deleted = await db.ResultStatus.destroy({
-                where: { StatusID: statusId }
+                where: { ResultID: resultId }
             });
 
             if (deleted === 0) {
@@ -73,7 +69,7 @@ class ResultStatusService {
             }
 
             // Sorting settings
-            const order = sortby && sortCode ? [[sortby, sortCode]] : [["StatusID", "ASC"]];
+            const order = sortby && sortCode ? [[sortby, sortCode]] : [["ResultID", "ASC"]];
 
             // Fetch data with pagination, search, and sorting
             const { count, rows } = await db.ResultStatus.findAndCountAll({

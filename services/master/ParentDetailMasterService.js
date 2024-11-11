@@ -7,12 +7,32 @@ class ParentDetailMasterService {
     // Create a new parent detail record
     async createParentDetail(data) {
         try {
-            const parentDetail = await db.ParentDetailMaster.create({
-                ParentName: data.ParentName,
-                ContactNumber: data.ContactNumber,
-                Email: data.Email,
-                Address: data.Address,
-                StatusID: data.StatusID
+            const parentDetail = await db.ParentsDetailMaster.create({
+                StudentID: data.StudentID,
+                FathersName: data.FathersName,
+                OccupationF: data.OccupationF,
+                OrganisationF: data.OrganisationF,
+                DesignationF: data.DesignationF,
+                QualificationF: data.QualificationF,
+                MobileNumberF: data.MobileNumberF,
+                EmailIDF: data.EmailIDF,
+                MothersName: data.MothersName,
+                OccupationM: data.OccupationM,
+                OrganisationM: data.OrganisationM,
+                DesignationM: data.DesignationM,
+                QualificationM: data.QualificationM,
+                MobileNumberM: data.MobileNumberM,
+                EmailIDM: data.EmailIDM,
+                LocalGardianName: data.LocalGardianName,
+                MobileNumberL: data.MobileNumberL,
+                Relation: data.Relation,
+                FatherPhoto: data.FatherPhoto,
+                MotherPhoto: data.MotherPhoto,
+                LocalGardianPhoto: data.LocalGardianPhoto,
+                CreatedBy: data.CreatedBy,
+                ModifiedBy: data.ModifiedBy,
+                CreatedOn: data.CreatedOn,
+                ModifiedOn: data.ModifiedOn
             });
             return parentDetail;
         } catch (error) {
@@ -21,17 +41,37 @@ class ParentDetailMasterService {
         }
     }
 
-    // Update an existing parent detail record by ParentID
-    async updateParentDetail(parentId, data) {
+    // Update an existing parent detail record by ParentsID
+    async updateParentDetail(parentsId, data) {
         try {
-            const updatedParentDetail = await db.ParentDetailMaster.update({
-                ParentName: data.ParentName,
-                ContactNumber: data.ContactNumber,
-                Email: data.Email,
-                Address: data.Address,
-                StatusID: data.StatusID
+            const updatedParentDetail = await db.ParentsDetailMaster.update({
+                StudentID: data.StudentID,
+                FathersName: data.FathersName,
+                OccupationF: data.OccupationF,
+                OrganisationF: data.OrganisationF,
+                DesignationF: data.DesignationF,
+                QualificationF: data.QualificationF,
+                MobileNumberF: data.MobileNumberF,
+                EmailIDF: data.EmailIDF,
+                MothersName: data.MothersName,
+                OccupationM: data.OccupationM,
+                OrganisationM: data.OrganisationM,
+                DesignationM: data.DesignationM,
+                QualificationM: data.QualificationM,
+                MobileNumberM: data.MobileNumberM,
+                EmailIDM: data.EmailIDM,
+                LocalGardianName: data.LocalGardianName,
+                MobileNumberL: data.MobileNumberL,
+                Relation: data.Relation,
+                FatherPhoto: data.FatherPhoto,
+                MotherPhoto: data.MotherPhoto,
+                LocalGardianPhoto: data.LocalGardianPhoto,
+                CreatedBy: data.CreatedBy,
+                ModifiedBy: data.ModifiedBy,
+                CreatedOn: data.CreatedOn,
+                ModifiedOn: data.ModifiedOn
             }, {
-                where: { ParentID: parentId }
+                where: { ParentsID: parentsId }
             });
 
             if (updatedParentDetail[0] === 0) {
@@ -45,11 +85,11 @@ class ParentDetailMasterService {
         }
     }
 
-    // Delete a parent detail record by ParentID
-    async deleteParentDetail(parentId) {
+    // Delete a parent detail record by ParentsID
+    async deleteParentDetail(parentsId) {
         try {
-            const deleted = await db.ParentDetailMaster.destroy({
-                where: { ParentID: parentId }
+            const deleted = await db.ParentsDetailMaster.destroy({
+                where: { ParentsID: parentsId }
             });
 
             if (deleted === 0) {
@@ -77,10 +117,10 @@ class ParentDetailMasterService {
             }
 
             // Sorting settings
-            const order = sortby && sortCode ? [[sortby, sortCode]] : [["ParentID", "ASC"]];
+            const order = sortby && sortCode ? [[sortby, sortCode]] : [["ParentsID", "ASC"]];
 
             // Fetch data with pagination, search, and sorting
-            const { count, rows } = await db.ParentDetailMaster.findAndCountAll({
+            const { count, rows } = await db.ParentsDetailMaster.findAndCountAll({
                 where,
                 offset,
                 limit: parseInt(limit) || Helper.getPageNumber(1, limit), // Default limit if undefined

@@ -8,10 +8,13 @@ class SmsGatewayDetailService {
     async createGateway(data) {
         try {
             const gateway = await db.SmsGatewayDetail.create({
-                GatewayName: data.GatewayName,
-                GatewayURL: data.GatewayURL,
-                ApiKey: data.ApiKey,
-                StatusID: data.StatusID
+                API: data.API,
+                SenderID: data.SenderID,
+                SMSUserName: data.SMSUserName,
+                SMSType: data.SMSType,
+                APIKey: data.APIKey,
+                CreatedBy: data.CreatedBy,
+                CreatedOn: new Date()
             });
             return gateway;
         } catch (error) {
@@ -24,10 +27,13 @@ class SmsGatewayDetailService {
     async updateGateway(gatewayId, data) {
         try {
             const updatedGateway = await db.SmsGatewayDetail.update({
-                GatewayName: data.GatewayName,
-                GatewayURL: data.GatewayURL,
-                ApiKey: data.ApiKey,
-                StatusID: data.StatusID
+                API: data.API,
+                SenderID: data.SenderID,
+                SMSUserName: data.SMSUserName,
+                SMSType: data.SMSType,
+                APIKey: data.APIKey,
+                ModifiedBy: data.ModifiedBy,
+                ModifiedOn: new Date()
             }, {
                 where: { GatewayID: gatewayId }
             });

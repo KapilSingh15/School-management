@@ -8,9 +8,7 @@ class StaffTypeMasterService {
     async createType(data) {
         try {
             const staffType = await db.StaffTypeMaster.create({
-                TypeName: data.TypeName,
-                Description: data.Description,
-                StatusID: data.StatusID
+                TypeName: data.TypeName,   // Staff Type Name
             });
             return staffType;
         } catch (error) {
@@ -23,9 +21,7 @@ class StaffTypeMasterService {
     async updateType(typeId, data) {
         try {
             const updatedType = await db.StaffTypeMaster.update({
-                TypeName: data.TypeName,
-                Description: data.Description,
-                StatusID: data.StatusID
+                TypeName: data.TypeName,   // Staff Type Name
             }, {
                 where: { TypeID: typeId }
             });

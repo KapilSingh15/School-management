@@ -8,9 +8,8 @@ class GenderMasterService {
     async createGender(data) {
         try {
             const gender = await db.GenderMaster.create({
-                GenderName: data.GenderName,
-                Description: data.Description,
-                StatusID: data.StatusID
+                Gender: data.Gender,       // Gender field
+                StatusID: data.StatusID    // StatusID field
             });
             return gender;
         } catch (error) {
@@ -23,11 +22,10 @@ class GenderMasterService {
     async updateGender(genderId, data) {
         try {
             const updatedGender = await db.GenderMaster.update({
-                GenderName: data.GenderName,
-                Description: data.Description,
-                StatusID: data.StatusID
+                Gender: data.Gender,       // Gender field
+                StatusID: data.StatusID    // StatusID field
             }, {
-                where: { GenderID: genderId }
+                where: { GenderID: genderId }  // Identifying the record by GenderID
             });
 
             if (updatedGender[0] === 0) {
@@ -45,7 +43,7 @@ class GenderMasterService {
     async deleteGender(genderId) {
         try {
             const deleted = await db.GenderMaster.destroy({
-                where: { GenderID: genderId }
+                where: { GenderID: genderId }  // Deleting the record by GenderID
             });
 
             if (deleted === 0) {

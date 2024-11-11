@@ -3,17 +3,26 @@ const { Op } = require("sequelize");
 const Helper = require("../../config/helper");
 
 class StaffMasterService {
-    
+
     // Create a new staff record
     async createStaff(data) {
         try {
             const staff = await db.StaffMaster.create({
-                FirstName: data.FirstName,
-                LastName: data.LastName,
-                Email: data.Email,
-                Phone: data.Phone,
+                RoleID: data.RoleID,
+                BranchID: data.BranchID,
+                LoginID: data.LoginID,
+                Password: data.Password,
+                Name: data.Name,
+                GenderID: data.GenderID,
+                MobileNumber: data.MobileNumber,
+                PhoneNumber: data.PhoneNumber,
+                EmailID: data.EmailID,
                 Address: data.Address,
-                StatusID: data.StatusID
+                Photo: data.Photo,
+                DateOfJoining: data.DateOfJoining,
+                DateOfLeave: data.DateOfLeave,
+                CreatedBy: data.CreatedBy,
+                CreatedOn: new Date(),
             });
             return staff;
         } catch (error) {
@@ -26,12 +35,21 @@ class StaffMasterService {
     async updateStaff(staffId, data) {
         try {
             const updatedStaff = await db.StaffMaster.update({
-                FirstName: data.FirstName,
-                LastName: data.LastName,
-                Email: data.Email,
-                Phone: data.Phone,
+                RoleID: data.RoleID,
+                BranchID: data.BranchID,
+                LoginID: data.LoginID,
+                Password: data.Password,
+                Name: data.Name,
+                GenderID: data.GenderID,
+                MobileNumber: data.MobileNumber,
+                PhoneNumber: data.PhoneNumber,
+                EmailID: data.EmailID,
                 Address: data.Address,
-                StatusID: data.StatusID
+                Photo: data.Photo,
+                DateOfJoining: data.DateOfJoining,
+                DateOfLeave: data.DateOfLeave,
+                ModifiedBy: data.ModifiedBy,
+                ModifiedOn: new Date(),
             }, {
                 where: { StaffID: staffId }
             });

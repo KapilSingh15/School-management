@@ -32,6 +32,10 @@ module.exports = (sequelize, DataTypes) => {
       Logo: {
         type: DataTypes.STRING(50),
         allowNull: true
+      },
+      status: {
+        type: DataTypes.STRING(50),
+        allowNull: true
       }
     }, {
       timestamps: false,

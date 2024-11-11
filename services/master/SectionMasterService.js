@@ -8,9 +8,11 @@ class SectionMasterService {
     async createSection(data) {
         try {
             const section = await db.SectionMaster.create({
+                BranchID: data.BranchID,
                 SectionName: data.SectionName,
-                Description: data.Description,
-                StatusID: data.StatusID
+                StatusID: data.StatusID,
+                CreatedBy: data.CreatedBy,
+                CreatedOn: new Date()
             });
             return section;
         } catch (error) {
@@ -23,9 +25,11 @@ class SectionMasterService {
     async updateSection(sectionId, data) {
         try {
             const updatedSection = await db.SectionMaster.update({
+                BranchID: data.BranchID,
                 SectionName: data.SectionName,
-                Description: data.Description,
-                StatusID: data.StatusID
+                StatusID: data.StatusID,
+                ModifiedBy: data.ModifiedBy,
+                ModifiedOn: new Date()
             }, {
                 where: { SectionID: sectionId }
             });

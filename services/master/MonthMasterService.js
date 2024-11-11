@@ -9,8 +9,9 @@ class MonthMasterService {
         try {
             const month = await db.MonthMaster.create({
                 MonthName: data.MonthName,
-                Description: data.Description,
-                StatusID: data.StatusID
+                NoOfDays: data.NoOfDays,
+                LeapYear: data.LeapYear,
+                SortBy: data.SortBy
             });
             return month;
         } catch (error) {
@@ -24,8 +25,9 @@ class MonthMasterService {
         try {
             const updatedMonth = await db.MonthMaster.update({
                 MonthName: data.MonthName,
-                Description: data.Description,
-                StatusID: data.StatusID
+                NoOfDays: data.NoOfDays,
+                LeapYear: data.LeapYear,
+                SortBy: data.SortBy
             }, {
                 where: { MonthID: monthId }
             });

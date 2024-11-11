@@ -3,15 +3,15 @@ const { Op } = require("sequelize");
 const Helper = require("../../config/helper");
 
 class FrequencyMonthMappingMasterService {
-    
+
     // Create a new frequency month mapping record
     async createFrequencyMonthMapping(data) {
         try {
             const mapping = await db.FrequencyMonthMappingMaster.create({
-                FrequencyID: data.FrequencyID,
-                Month: data.Month,
-                Year: data.Year,
-                StatusID: data.StatusID
+                FrequencyID: data.FrequencyID,     // FrequencyID from the request
+                MonthID: data.MonthID,             // MonthID from the request
+                FinancialYearID: data.FinancialYearID,  // FinancialYearID from the request
+                BranchID: data.BranchID           // BranchID from the request
             });
             return mapping;
         } catch (error) {
@@ -20,16 +20,16 @@ class FrequencyMonthMappingMasterService {
         }
     }
 
-    // Update an existing frequency month mapping record by MappingID
-    async updateFrequencyMonthMapping(mappingId, data) {
+    // Update an existing frequency month mapping record by FrequencyMonthID
+    async updateFrequencyMonthMapping(frequencyMonthId, data) {
         try {
             const updatedMapping = await db.FrequencyMonthMappingMaster.update({
-                FrequencyID: data.FrequencyID,
-                Month: data.Month,
-                Year: data.Year,
-                StatusID: data.StatusID
+                FrequencyID: data.FrequencyID,     // FrequencyID from the request
+                MonthID: data.MonthID,             // MonthID from the request
+                FinancialYearID: data.FinancialYearID,  // FinancialYearID from the request
+                BranchID: data.BranchID           // BranchID from the request
             }, {
-                where: { MappingID: mappingId }
+                where: { FrequencyMonthID: frequencyMonthId }  // Using FrequencyMonthID for update
             });
 
             if (updatedMapping[0] === 0) {
@@ -43,11 +43,11 @@ class FrequencyMonthMappingMasterService {
         }
     }
 
-    // Delete a frequency month mapping record by MappingID
-    async deleteFrequencyMonthMapping(mappingId) {
+    // Delete a frequency month mapping record by FrequencyMonthID
+    async deleteFrequencyMonthMapping(frequencyMonthId) {
         try {
             const deleted = await db.FrequencyMonthMappingMaster.destroy({
-                where: { MappingID: mappingId }
+                where: { FrequencyMonthID: frequencyMonthId }  // Using FrequencyMonthID to delete record
             });
 
             if (deleted === 0) {
@@ -75,7 +75,7 @@ class FrequencyMonthMappingMasterService {
             }
 
             // Sorting settings
-            const order = sortby && sortCode ? [[sortby, sortCode]] : [["MappingID", "ASC"]];
+            const order = sortby && sortCode ? [[sortby, sortCode]] : [["FrequencyMonthID", "ASC"]];
 
             // Fetch data with pagination, search, and sorting
             const { count, rows } = await db.FrequencyMonthMappingMaster.findAndCountAll({

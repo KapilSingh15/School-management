@@ -3,15 +3,23 @@ const { Op } = require("sequelize");
 const Helper = require("../../config/helper");
 
 class ResultReportMasterService {
-    
+
     // Create a new result report record
     async createResultReport(data) {
         try {
             const report = await db.ResultReportMaster.create({
-                StudentID: data.StudentID,
-                TotalMarks: data.TotalMarks,
-                Percentage: data.Percentage,
-                StatusID: data.StatusID
+                SubjectID: data.SubjectID,
+                SubjectName: data.SubjectName,
+                FA1: data.FA1,
+                FA2: data.FA2,
+                FA3: data.FA3,
+                FA4: data.FA4,
+                SA1: data.SA1,
+                SA2: data.SA2,
+                Total1: data.Total1,
+                Total2: data.Total2,
+                FASA: data.FASA,
+                GradePoint: data.GradePoint
             });
             return report;
         } catch (error) {
@@ -24,10 +32,18 @@ class ResultReportMasterService {
     async updateResultReport(reportId, data) {
         try {
             const updatedReport = await db.ResultReportMaster.update({
-                StudentID: data.StudentID,
-                TotalMarks: data.TotalMarks,
-                Percentage: data.Percentage,
-                StatusID: data.StatusID
+                SubjectID: data.SubjectID,
+                SubjectName: data.SubjectName,
+                FA1: data.FA1,
+                FA2: data.FA2,
+                FA3: data.FA3,
+                FA4: data.FA4,
+                SA1: data.SA1,
+                SA2: data.SA2,
+                Total1: data.Total1,
+                Total2: data.Total2,
+                FASA: data.FASA,
+                GradePoint: data.GradePoint
             }, {
                 where: { ReportID: reportId }
             });

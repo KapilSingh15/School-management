@@ -13,6 +13,8 @@ class SchoolBranchDetailsService {
                 Address: data.Address,
                 ContactNo: data.ContactNo,
                 EmailID: data.EmailID,
+                FaxNo: data.FaxNo,  // Added FaxNo
+                Website: data.Website,  // Added Website
                 StatusID: data.StatusID
             });
             return branch;
@@ -31,6 +33,8 @@ class SchoolBranchDetailsService {
                 Address: data.Address,
                 ContactNo: data.ContactNo,
                 EmailID: data.EmailID,
+                FaxNo: data.FaxNo,  // Added FaxNo
+                Website: data.Website,  // Added Website
                 StatusID: data.StatusID
             }, {
                 where: { BranchID: branchId }

@@ -8,11 +8,11 @@ class QuarterMasterDetailService {
     async createQuarterMasterDetail(data) {
         try {
             const detail = await db.QuarterMasterDetail.create({
-                QuarterID: data.QuarterID,
-                Year: data.Year,
-                StartDate: data.StartDate,
-                EndDate: data.EndDate,
-                StatusID: data.StatusID
+                QuaterID: data.QuaterID,
+                QuaterStartDate: data.QuaterStartDate,
+                QuaterEndDate: data.QuaterEndDate,
+                PayableDate: data.PayableDate,
+                CreatedBy: data.CreatedBy,
             });
             return detail;
         } catch (error) {
@@ -21,17 +21,17 @@ class QuarterMasterDetailService {
         }
     }
 
-    // Update an existing quarter master detail record by DetailID
+    // Update an existing quarter master detail record by QuaterDetailID
     async updateQuarterMasterDetail(detailId, data) {
         try {
             const updatedDetail = await db.QuarterMasterDetail.update({
-                QuarterID: data.QuarterID,
-                Year: data.Year,
-                StartDate: data.StartDate,
-                EndDate: data.EndDate,
-                StatusID: data.StatusID
+                QuaterID: data.QuaterID,
+                QuaterStartDate: data.QuaterStartDate,
+                QuaterEndDate: data.QuaterEndDate,
+                PayableDate: data.PayableDate,
+                ModifiedBy: data.ModifiedBy,
             }, {
-                where: { DetailID: detailId }
+                where: { QuaterDetailID: detailId }
             });
 
             if (updatedDetail[0] === 0) {
@@ -45,11 +45,11 @@ class QuarterMasterDetailService {
         }
     }
 
-    // Delete a quarter master detail record by DetailID
+    // Delete a quarter master detail record by QuaterDetailID
     async deleteQuarterMasterDetail(detailId) {
         try {
             const deleted = await db.QuarterMasterDetail.destroy({
-                where: { DetailID: detailId }
+                where: { QuaterDetailID: detailId }
             });
 
             if (deleted === 0) {
@@ -77,7 +77,7 @@ class QuarterMasterDetailService {
             }
 
             // Sorting settings
-            const order = sortby && sortCode ? [[sortby, sortCode]] : [["DetailID", "ASC"]];
+            const order = sortby && sortCode ? [[sortby, sortCode]] : [["QuaterDetailID", "ASC"]];
 
             // Fetch data with pagination, search, and sorting
             const { count, rows } = await db.QuarterMasterDetail.findAndCountAll({

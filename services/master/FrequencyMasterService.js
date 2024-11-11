@@ -8,7 +8,7 @@ class FrequencyMasterService {
     async createFrequency(data) {
         try {
             const frequency = await db.FrequencyMaster.create({
-                FrequencyName: data.FrequencyName,
+                Frequency: data.Frequency, // Match model field: FrequencyName to Frequency
                 Description: data.Description,
                 StatusID: data.StatusID
             });
@@ -23,7 +23,7 @@ class FrequencyMasterService {
     async updateFrequency(frequencyId, data) {
         try {
             const updatedFrequency = await db.FrequencyMaster.update({
-                FrequencyName: data.FrequencyName,
+                Frequency: data.Frequency, // Match model field: FrequencyName to Frequency
                 Description: data.Description,
                 StatusID: data.StatusID
             }, {

@@ -9,10 +9,11 @@ class ResultMasterService {
         try {
             const result = await db.ResultMaster.create({
                 StudentID: data.StudentID,
-                SubjectID: data.SubjectID,
-                MarksObtained: data.MarksObtained,
-                TotalMarks: data.TotalMarks,
-                StatusID: data.StatusID
+                ExaminationScheduleID: data.ExaminationScheduleID, // Adjusted according to new schema
+                CreatedBy: data.CreatedBy,
+                CreatedOn: data.CreatedOn,
+                ModifiedBy: data.ModifiedBy,
+                ModifiedOn: data.ModifiedOn
             });
             return result;
         } catch (error) {
@@ -26,10 +27,11 @@ class ResultMasterService {
         try {
             const updatedResult = await db.ResultMaster.update({
                 StudentID: data.StudentID,
-                SubjectID: data.SubjectID,
-                MarksObtained: data.MarksObtained,
-                TotalMarks: data.TotalMarks,
-                StatusID: data.StatusID
+                ExaminationScheduleID: data.ExaminationScheduleID, // Adjusted according to new schema
+                CreatedBy: data.CreatedBy,
+                CreatedOn: data.CreatedOn,
+                ModifiedBy: data.ModifiedBy,
+                ModifiedOn: data.ModifiedOn
             }, {
                 where: { ResultID: resultId }
             });

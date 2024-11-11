@@ -9,8 +9,14 @@ class RouteMasterService {
         try {
             const route = await db.RouteMaster.create({
                 RouteName: data.RouteName,
-                Description: data.Description,
-                StatusID: data.StatusID
+                BusID: data.BusID, // added to match schema
+                AreaIDFrom: data.AreaIDFrom, // added to match schema
+                AreaIDTo: data.AreaIDTo, // added to match schema
+                TimeID: data.TimeID, // added to match schema
+                DriverID: data.DriverID, // added to match schema
+                ConductorID: data.ConductorID, // added to match schema
+                Distance: data.Distance, // added to match schema
+                StatusID: data.StatusID, // updated to match schema
             });
             return route;
         } catch (error) {
@@ -24,10 +30,16 @@ class RouteMasterService {
         try {
             const updatedRoute = await db.RouteMaster.update({
                 RouteName: data.RouteName,
-                Description: data.Description,
-                StatusID: data.StatusID
+                BusID: data.BusID, // updated to match schema
+                AreaIDFrom: data.AreaIDFrom, // updated to match schema
+                AreaIDTo: data.AreaIDTo, // updated to match schema
+                TimeID: data.TimeID, // updated to match schema
+                DriverID: data.DriverID, // updated to match schema
+                ConductorID: data.ConductorID, // updated to match schema
+                Distance: data.Distance, // updated to match schema
+                StatusID: data.StatusID, // updated to match schema
             }, {
-                where: { RouteID: routeId }
+                where: { RouteID: routeId } // updated to match schema
             });
 
             if (updatedRoute[0] === 0) {
@@ -45,7 +57,7 @@ class RouteMasterService {
     async deleteRoute(routeId) {
         try {
             const deleted = await db.RouteMaster.destroy({
-                where: { RouteID: routeId }
+                where: { RouteID: routeId } // updated to match schema
             });
 
             if (deleted === 0) {

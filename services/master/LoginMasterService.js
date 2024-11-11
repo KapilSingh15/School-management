@@ -8,10 +8,16 @@ class LoginMasterService {
     async createLogin(data) {
         try {
             const login = await db.LoginMaster.create({
-                Username: data.Username,
-                Password: data.Password, // Note: Ensure to hash passwords in production
+                LoginID: data.LoginID,
+                Password: data.Password, // Ensure passwords are hashed in production
+                LoginName: data.LoginName,
+                MobileNumber: data.MobileNumber,
+                EmailID: data.EmailID,
+                RoleID: data.RoleID,
+                BranchID: data.BranchID,
                 StatusID: data.StatusID,
-                LastLogin: data.LastLogin
+                CreatedOn: data.CreatedOn,
+                CreatedBy: data.CreatedBy
             });
             return login;
         } catch (error) {
@@ -24,10 +30,15 @@ class LoginMasterService {
     async updateLogin(loginId, data) {
         try {
             const updatedLogin = await db.LoginMaster.update({
-                Username: data.Username,
-                Password: data.Password, // Note: Hash the password if updated
+                Password: data.Password, // Ensure to hash the password when updating
+                LoginName: data.LoginName,
+                MobileNumber: data.MobileNumber,
+                EmailID: data.EmailID,
+                RoleID: data.RoleID,
+                BranchID: data.BranchID,
                 StatusID: data.StatusID,
-                LastLogin: data.LastLogin
+                ModifiedOn: data.ModifiedOn,
+                ModifiedBy: data.ModifiedBy
             }, {
                 where: { LoginID: loginId }
             });

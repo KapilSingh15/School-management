@@ -8,9 +8,9 @@ class StateMasterService {
     async createState(data) {
         try {
             const state = await db.StateMaster.create({
-                StateName: data.StateName,
-                CountryID: data.CountryID,
-                StatusID: data.StatusID
+                StateName: data.StateName,  // Name of the state
+                CountryID: data.CountryID,  // Foreign key reference to Country
+                StatusID: data.StatusID     // Foreign key reference to Status
             });
             return state;
         } catch (error) {
@@ -23,9 +23,9 @@ class StateMasterService {
     async updateState(stateId, data) {
         try {
             const updatedState = await db.StateMaster.update({
-                StateName: data.StateName,
-                CountryID: data.CountryID,
-                StatusID: data.StatusID
+                StateName: data.StateName,  // Name of the state
+                CountryID: data.CountryID,  // Foreign key reference to Country
+                StatusID: data.StatusID     // Foreign key reference to Status
             }, {
                 where: { StateID: stateId }
             });

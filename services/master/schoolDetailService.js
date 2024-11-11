@@ -7,14 +7,17 @@ class SchoolDetailsService {
     // Create a new school record
     async createSchool(data) {
         try {
-            const school = await db.SchoolDetails.create({
-                SchoolName: data.SchoolName,
-                Address: data.Address,
-                ContactNo: data.ContactNo,
-                EmailID: data.EmailID,
-                FaxNo: data.FaxNo,
-                Website: data.Website,
-                Logo: data.Logo
+            console.log(data);
+            
+            const school = await db.schoolDetails.create({
+                SchoolName: data.schoolName,
+                Address: data.address,
+                ContactNo: data.contactNo,
+                EmailID: data.emailID,
+                FaxNo: data.faxNo,
+                Website: data.website,
+                Logo: data.logo,
+                status:'Active'
             });
             return school;
         } catch (error) {
@@ -26,14 +29,15 @@ class SchoolDetailsService {
     // Update an existing school record by SchoolID
     async updateSchool(schoolId, data) {
         try {
-            const updatedSchool = await db.SchoolDetails.update({
-                SchoolName: data.SchoolName,
-                Address: data.Address,
-                ContactNo: data.ContactNo,
-                EmailID: data.EmailID,
-                FaxNo: data.FaxNo,
-                Website: data.Website,
-                Logo: data.Logo
+            const updatedSchool = await db.schoolDetails.update({
+                SchoolName: data.schoolName,
+                Address: data.address,
+                ContactNo: data.contactNo,
+                EmailID: data.emailID,
+                FaxNo: data.faxNo,
+                Website: data.website,
+                Logo: data.logo,
+                status:data.status
             }, {
                 where: { SchoolID: schoolId }
             });
@@ -52,7 +56,7 @@ class SchoolDetailsService {
     // Delete a school record by SchoolID
     async deleteSchool(schoolId) {
         try {
-            const deleted = await db.SchoolDetails.destroy({
+            const deleted = await db.schoolDetails.destroy({
                 where: { SchoolID: schoolId }
             });
 
@@ -69,7 +73,7 @@ class SchoolDetailsService {
 
     // Fetch school records with optional search, sorting, and pagination
     async fetchSchools(query) {
-        const { searchBy, searchValue, sortby, sortCode, page, limit } = query;
+        const { searchBy, status, searchValue, sortby, sortCode, page, limit } = query;
 
         try {
             let where = {};
@@ -79,16 +83,18 @@ class SchoolDetailsService {
             if (searchBy && searchValue) {
                 where[searchBy] = { [Op.like]: `%${searchValue}%` };
             }
-
+            if (status) {
+                where.status = { [Op.eq]: status };
+            }
             // Sorting settings
             const order = sortby && sortCode ? [[sortby, sortCode]] : [["SchoolID", "ASC"]];
 
             // Fetch data with pagination, search, and sorting
-            const { count, rows } = await db.SchoolDetails.findAndCountAll({
+            const { count, rows } = await db.schoolDetails.findAndCountAll({
                 where,
-                offset,
-                limit: parseInt(limit) || Helper.getPageNumber(1, limit), // Default limit if undefined
-                order
+                offset:offset,
+                limit: Number(limit),
+                 order
             });
 
             return {
@@ -96,7 +102,7 @@ class SchoolDetailsService {
                     pagination: {
                         currentPage: parseInt(page),
                         pageSize: parseInt(limit) || Helper.getPageNumber(1, limit),
-                        totalPages: Math.ceil(count / (parseInt(limit) || Helper.getPageNumber(1, limit))),
+                        totalPages: Math.ceil(count / Number(limit)),
                         totalResults: count,
                     },
                     data: rows,

@@ -10,8 +10,9 @@ class ModulePageMasterService {
             const modulePage = await db.ModulePageMaster.create({
                 ModuleID: data.ModuleID,
                 PageName: data.PageName,
-                PageURL: data.PageURL,
-                StatusID: data.StatusID
+                Page: data.Page,  // Updated field to match schema
+                Status: data.Status,  // Updated field to match schema
+                SortBy: data.SortBy
             });
             return modulePage;
         } catch (error) {
@@ -26,8 +27,9 @@ class ModulePageMasterService {
             const updatedModulePage = await db.ModulePageMaster.update({
                 ModuleID: data.ModuleID,
                 PageName: data.PageName,
-                PageURL: data.PageURL,
-                StatusID: data.StatusID
+                Page: data.Page,  // Updated field to match schema
+                Status: data.Status,  // Updated field to match schema
+                SortBy: data.SortBy
             }, {
                 where: { ModulePageID: modulePageId }
             });

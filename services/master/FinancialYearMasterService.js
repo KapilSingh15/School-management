@@ -8,10 +8,11 @@ class FinancialYearMasterService {
     async createFinancialYear(data) {
         try {
             const financialYear = await db.FinancialYearMaster.create({
-                Year: data.Year,
+                BranchID: data.BranchID,
                 StartDate: data.StartDate,
                 EndDate: data.EndDate,
-                StatusID: data.StatusID
+                CreatedOn: data.CreatedOn, // Optionally add CreatedOn and CreatedBy
+                CreatedBy: data.CreatedBy
             });
             return financialYear;
         } catch (error) {
@@ -24,10 +25,11 @@ class FinancialYearMasterService {
     async updateFinancialYear(financialYearId, data) {
         try {
             const updatedFinancialYear = await db.FinancialYearMaster.update({
-                Year: data.Year,
+                BranchID: data.BranchID,
                 StartDate: data.StartDate,
                 EndDate: data.EndDate,
-                StatusID: data.StatusID
+                ModifiedOn: data.ModifiedOn, // Optionally add ModifiedOn and ModifiedBy
+                ModifiedBy: data.ModifiedBy
             }, {
                 where: { FinancialYearID: financialYearId }
             });

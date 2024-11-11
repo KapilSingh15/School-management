@@ -8,12 +8,8 @@ class RoutePlanDetailMasterService {
     async createRoutePlanDetail(data) {
         try {
             const detail = await db.RoutePlanDetailMaster.create({
-                RouteID: data.RouteID,
-                StopSequence: data.StopSequence,
-                StopLocation: data.StopLocation,
-                ArrivalTime: data.ArrivalTime,
-                DepartureTime: data.DepartureTime,
-                StatusID: data.StatusID
+                RoutePlanID: data.RoutePlanID,  // updated to match schema
+                ClassID: data.ClassID,          // updated to match schema
             });
             return detail;
         } catch (error) {
@@ -22,18 +18,14 @@ class RoutePlanDetailMasterService {
         }
     }
 
-    // Update an existing route plan detail record by DetailID
+    // Update an existing route plan detail record by RoutePlanDetailID
     async updateRoutePlanDetail(detailId, data) {
         try {
             const updatedDetail = await db.RoutePlanDetailMaster.update({
-                RouteID: data.RouteID,
-                StopSequence: data.StopSequence,
-                StopLocation: data.StopLocation,
-                ArrivalTime: data.ArrivalTime,
-                DepartureTime: data.DepartureTime,
-                StatusID: data.StatusID
+                RoutePlanID: data.RoutePlanID,  // updated to match schema
+                ClassID: data.ClassID,          // updated to match schema
             }, {
-                where: { DetailID: detailId }
+                where: { RoutePlanDetailID: detailId }  // updated to match schema
             });
 
             if (updatedDetail[0] === 0) {
@@ -47,11 +39,11 @@ class RoutePlanDetailMasterService {
         }
     }
 
-    // Delete a route plan detail record by DetailID
+    // Delete a route plan detail record by RoutePlanDetailID
     async deleteRoutePlanDetail(detailId) {
         try {
             const deleted = await db.RoutePlanDetailMaster.destroy({
-                where: { DetailID: detailId }
+                where: { RoutePlanDetailID: detailId }  // updated to match schema
             });
 
             if (deleted === 0) {
@@ -79,7 +71,7 @@ class RoutePlanDetailMasterService {
             }
 
             // Sorting settings
-            const order = sortby && sortCode ? [[sortby, sortCode]] : [["DetailID", "ASC"]];
+            const order = sortby && sortCode ? [[sortby, sortCode]] : [["RoutePlanDetailID", "ASC"]];  // updated to match schema
 
             // Fetch data with pagination, search, and sorting
             const { count, rows } = await db.RoutePlanDetailMaster.findAndCountAll({

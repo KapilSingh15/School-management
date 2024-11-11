@@ -9,8 +9,6 @@ class QuotaMasterService {
         try {
             const quota = await db.QuotaMaster.create({
                 QuotaName: data.QuotaName,
-                Description: data.Description,
-                StatusID: data.StatusID
             });
             return quota;
         } catch (error) {
@@ -24,8 +22,6 @@ class QuotaMasterService {
         try {
             const updatedQuota = await db.QuotaMaster.update({
                 QuotaName: data.QuotaName,
-                Description: data.Description,
-                StatusID: data.StatusID
             }, {
                 where: { QuotaID: quotaId }
             });

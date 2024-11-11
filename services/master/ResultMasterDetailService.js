@@ -9,10 +9,9 @@ class ResultMasterDetailService {
         try {
             const detail = await db.ResultMasterDetail.create({
                 ResultID: data.ResultID,
-                StudentID: data.StudentID,
                 SubjectID: data.SubjectID,
-                MarksObtained: data.MarksObtained,
-                StatusID: data.StatusID
+                TotalMarks: data.TotalMarks,
+                MarksScored: data.MarksScored
             });
             return detail;
         } catch (error) {
@@ -21,17 +20,16 @@ class ResultMasterDetailService {
         }
     }
 
-    // Update an existing result master detail record by DetailID
+    // Update an existing result master detail record by ResultDetailsID
     async updateResultMasterDetail(detailId, data) {
         try {
             const updatedDetail = await db.ResultMasterDetail.update({
                 ResultID: data.ResultID,
-                StudentID: data.StudentID,
                 SubjectID: data.SubjectID,
-                MarksObtained: data.MarksObtained,
-                StatusID: data.StatusID
+                TotalMarks: data.TotalMarks,
+                MarksScored: data.MarksScored
             }, {
-                where: { DetailID: detailId }
+                where: { ResultDetailsID: detailId }
             });
 
             if (updatedDetail[0] === 0) {
@@ -45,11 +43,11 @@ class ResultMasterDetailService {
         }
     }
 
-    // Delete a result master detail record by DetailID
+    // Delete a result master detail record by ResultDetailsID
     async deleteResultMasterDetail(detailId) {
         try {
             const deleted = await db.ResultMasterDetail.destroy({
-                where: { DetailID: detailId }
+                where: { ResultDetailsID: detailId }
             });
 
             if (deleted === 0) {
@@ -77,7 +75,7 @@ class ResultMasterDetailService {
             }
 
             // Sorting settings
-            const order = sortby && sortCode ? [[sortby, sortCode]] : [["DetailID", "ASC"]];
+            const order = sortby && sortCode ? [[sortby, sortCode]] : [["ResultDetailsID", "ASC"]];
 
             // Fetch data with pagination, search, and sorting
             const { count, rows } = await db.ResultMasterDetail.findAndCountAll({
