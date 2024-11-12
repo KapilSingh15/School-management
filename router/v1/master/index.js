@@ -311,6 +311,7 @@ Router.get('/group', groupMasterController.FETCH_GROUPS);
 
 // Routes for logins
 Router.post('/login', loginMasterController.ADD_LOGIN);
+Router.post('/userlogin', loginMasterController.Login);
 Router.put('/login/:loginId', loginMasterController.UPDATE_LOGIN);
 Router.delete('/login/:loginId', loginMasterController.DELETE_LOGIN);
 Router.get('/login', loginMasterController.FETCH_LOGINS);

@@ -27,4 +27,5 @@ sequelize.authenticate().then(() => {
 
 db.schoolDetails = require("./master/schooldetail")(sequelize, Sequelize);
 db.AccountTypeMaster = require("./master/AccountTypeMaster")(sequelize, Sequelize);
+db.LoginMaster = require("./master/LoginMaster")(sequelize, Sequelize);
 module.exports = db;

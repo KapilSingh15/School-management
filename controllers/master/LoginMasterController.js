@@ -2,6 +2,10 @@ const LoginMasterService = require("../../services/master/LoginMasterService");
 const loginMasterService = new LoginMasterService();
 const httpStatus = require("http-status");
 const Response = require("../../response/index");
+const db = require("../../model");
+const {
+    genrateUserAuthToken,
+  } = require("../../middleware/users/index");
 
 // Add a new login record
 const ADD_LOGIN = async (req, res) => {
@@ -97,9 +101,45 @@ const FETCH_LOGINS = async (req, res) => {
     }
 };
 
+
+const Login = async (req, res) => {
+    try {
+      const { loginId, password } = req.body;
+  
+      const user = await db.LoginMaster.findOne({ where: { LoginID: loginId } });
+      if (!user) {
+        return Response.error(req, res, { msgCode: "NOT_FOUND" }, httpStatus.NOT_FOUND);
+      }
+  
+      if (user.Password !== password) {
+        return Response.error(req, res, { msgCode: "WRONG_PASS" }, httpStatus.UNAUTHORIZED);
+      }
+  
+      const accessToken = await genrateUserAuthToken({ 
+        loginId: user.LoginID,
+        roleId: user.RoleID,
+        branchId: [user.BranchID],
+        statusId: user.StatusID,
+        email : user.EmailID,
+        loginName : user.LoginName
+      });
+  
+      return Response.success(req, res, {
+        msgCode: "API_SUCCESS",
+        data: {
+          access_token: accessToken || ""
+        }
+      }, httpStatus.OK);
+  
+    } catch (error) {
+      return Response.error(req, res, { msgCode: "INTERNAL_SERVER_ERROR", ex: error.message }, httpStatus.INTERNAL_SERVER_ERROR);
+    }
+  };
+
 module.exports = {
     ADD_LOGIN,
     UPDATE_LOGIN,
     DELETE_LOGIN,
-    FETCH_LOGINS
+    FETCH_LOGINS,
+    Login
 };

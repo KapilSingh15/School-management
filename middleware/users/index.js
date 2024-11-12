@@ -60,7 +60,7 @@ exports.verifyAccessToken = async (req, res, next) => {
 exports.genrateUserAuthToken = (data) => {
     return jwt.signAsync(data, process.env.JWT_USER_PRIVATE_KEY, { expiresIn: process.env.JWT_USER_TOKEN_VALID_TILL })
         .then( (jwtToken) => {
-            return [1,jwtToken];
+            return jwtToken;
         }).catch(error => {
             return [0,error];
         });
